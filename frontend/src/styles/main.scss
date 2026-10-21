@@ -1,0 +1,1085 @@
+// =============================================================================
+// Percorsi: tema
+// Bootstrap personalizzato con le variabili Sass (le variabili vanno PRIMA dell'import di Bootstrap).
+//
+// Idea di design: il nome e' "Percorsi", quindi il segno distintivo e' un sentiero.
+// Compare nel logo, nella home e come linea del tempo del diario.
+// I colori sono a basso abbagliamento (niente bianco o nero puri): chi usa l'app e' spesso
+// stanco e deve poterla guardare anche la sera, dopo una giornata difficile.
+// =============================================================================
+
+// ---- Palette ----------------------------------------------------------------
+$foglio: #f2f3f8;            // sfondo della pagina (grigio-lilla chiaro)
+$carta: #fbfbfd;             // superfici: schede, campi, finestre
+$inchiostro: #22264a;        // testo (blu notte)
+$attenuato: #5b6080;         // testo secondario (contrasto 5,5:1 sul fondo)
+$indaco: #4540a8;            // colore d'azione: bottoni, link, elementi attivi
+$indaco-scuro: #37338c;
+$linea: #d9dbe8;             // bordi sottili
+$campo: #bfc3d9;             // bordo dei campi del modulo
+$lago: #2f7d6d;              // conferme
+
+// Scala dell'intensita' (1 = lieve, 5 = molto forte). Mai usata da sola: c'e' sempre anche il numero.
+$ramp: (
+  1: #9fd3c7,
+  2: #cde08e,
+  3: #f2d16b,
+  4: #ec9f57,
+  5: #b8453b,
+);
+$ramp-testo: (
+  1: $inchiostro,
+  2: $inchiostro,
+  3: $inchiostro,
+  4: $inchiostro,
+  5: #ffffff,
+);
+
+// ---- Variabili di Bootstrap -----------------------------------------------------
+$body-bg: $foglio;
+$body-color: $inchiostro;
+$body-secondary-color: $attenuato;
+$body-tertiary-bg: $carta;
+$primary: $indaco;
+$secondary: $attenuato;
+$success: $lago;
+$danger: #b8453b;
+$link-color: $indaco;
+$link-hover-color: $indaco-scuro;
+
+$font-family-sans-serif: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$headings-font-family: 'Bricolage Grotesque Variable', $font-family-sans-serif;
+$headings-font-weight: 700;
+$headings-color: $inchiostro;
+$font-size-base: 1.0625rem;
+$line-height-base: 1.6;
+
+$border-color: $linea;
+$border-radius: 0.625rem;
+$border-radius-sm: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-pill: 50rem;
+
+$input-bg: $carta;
+$input-border-color: $campo;
+$input-focus-border-color: $indaco;
+$input-focus-box-shadow: 0 0 0 0.25rem rgba($indaco, 0.25);
+$input-padding-y: 0.6rem;
+$input-padding-x: 0.85rem;
+$input-placeholder-color: #7b8099;
+$form-label-font-weight: 700;
+$form-label-margin-bottom: 0.4rem;
+$btn-padding-y: 0.6rem;
+$btn-padding-x: 1.2rem;
+$btn-font-weight: 700;
+$btn-focus-width: 0.25rem;
+
+$modal-content-bg: $carta;
+$modal-content-border-color: $linea;
+$modal-content-border-radius: 1rem;
+$modal-header-border-color: $linea;
+$modal-footer-border-color: $linea;
+$modal-backdrop-bg: $inchiostro;
+$modal-backdrop-opacity: 0.45;
+
+$container-padding-x: 1rem;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1080px,
+  xxl: 1080px,
+);
+
+$navbar-light-toggler-border-color: $campo;
+
+@import 'bootstrap/scss/bootstrap';
+
+// ---- Variabili CSS proprie ----------------------------------------------------
+:root {
+  --pc-linea: #{$linea};
+  --pc-carta: #{$carta};
+  --pc-indaco: #{$indaco};
+  --pc-attenuato: #{$attenuato};
+  @each $livello, $colore in $ramp {
+    --pc-ramp-#{$livello}: #{$colore};
+    --pc-ramp-testo-#{$livello}: #{map-get($ramp-testo, $livello)};
+  }
+}
+
+// ---- Base ---------------------------------------------------------------------
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1,
+.h1 {
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 3px solid rgba($indaco, 0.55);
+  outline-offset: 2px;
+}
+
+.pc-lead {
+  font-size: 1.2rem;
+  color: $attenuato;
+  max-width: 36rem;
+}
+
+.pc-measure {
+  max-width: 40rem;
+}
+
+.pc-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pc-main {
+  flex: 1;
+  padding-block: 2rem 4rem;
+}
+
+// ---- Bottoni ---------------------------------------------------------------------
+.btn {
+  min-height: 2.75rem; // almeno 44px: si tocca bene anche con una mano sola
+}
+
+.btn-sm {
+  min-height: 2.25rem;
+}
+
+.btn-link {
+  font-weight: 700;
+}
+
+// ---- Logo e barra di navigazione ---------------------------------------------
+.pc-nav {
+  border-bottom: 1px solid $linea;
+  padding-block: 0.6rem;
+}
+
+.pc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: $headings-font-family;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  color: $inchiostro;
+  text-decoration: none;
+
+  &:hover {
+    color: $inchiostro;
+  }
+}
+
+.pc-logo {
+  color: $indaco;
+}
+
+.pc-nav .navbar-nav .nav-link {
+  font-weight: 700;
+  color: $inchiostro;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    color: $indaco;
+  }
+
+  &.active {
+    color: $indaco;
+    border-bottom-color: $indaco;
+  }
+}
+
+.pc-nav-user {
+  color: $attenuato;
+  font-size: 0.95rem;
+}
+
+// ---- Home: il sentiero ----------------------------------------------------------
+.pc-hero {
+  padding-block: clamp(1.5rem, 5vw, 4rem) clamp(2rem, 6vw, 4.5rem);
+  display: grid;
+  gap: 2.5rem;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 1fr 1.05fr;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: clamp(2.35rem, 5.4vw, 4rem);
+    margin-bottom: 1.25rem;
+  }
+}
+
+.pc-trail {
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  aspect-ratio: 520 / 420;
+  margin-inline: auto;
+
+  svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.pc-trail-line {
+  fill: none;
+  stroke: $indaco;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pc-draw 2.4s cubic-bezier(0.45, 0.05, 0.25, 1) 0.15s forwards;
+}
+
+.pc-trail-dot {
+  stroke: $foglio;
+  stroke-width: 4;
+  opacity: 0;
+  animation: pc-appear 0.5s ease-out forwards;
+  animation-delay: var(--d, 0s);
+}
+
+.pc-trail-note {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(var(--tx, 0), var(--ty, 0));
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  width: max-content;
+  max-width: 10.5rem;
+  opacity: 0;
+  animation: pc-appear 0.5s ease-out forwards;
+  animation-delay: var(--d, 0s);
+
+  strong {
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  span {
+    color: $attenuato;
+  }
+
+  @include media-breakpoint-down(sm) {
+    transform: translate(var(--tx, 0), var(--ty-sm, var(--ty, 0)));
+    font-size: 0.72rem;
+    padding: 0.3rem 0.5rem;
+    max-width: 7.5rem;
+
+    strong {
+      font-size: 0.76rem;
+    }
+  }
+}
+
+@keyframes pc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pc-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-trail-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .pc-trail-dot,
+  .pc-trail-note {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.pc-features {
+  display: grid;
+  gap: 2rem;
+  padding-block: 2rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    padding-top: 1rem;
+    border-top: 3px solid $indaco;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    color: $attenuato;
+    margin: 0;
+  }
+}
+
+.pc-band {
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 2rem;
+  display: grid;
+  gap: 1rem;
+
+  h2 {
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    max-width: 38rem;
+  }
+}
+
+// ---- Intestazioni di pagina ------------------------------------------------------
+.pc-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+
+  h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin: 0;
+  }
+
+  p {
+    margin: 0.35rem 0 0;
+    color: $attenuato;
+  }
+}
+
+.pc-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 1rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ---- Moduli di accesso ------------------------------------------------------------
+.pc-auth {
+  max-width: 28rem;
+  margin: clamp(0rem, 3vw, 2rem) auto 0;
+
+  h1 {
+    font-size: 2.1rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+.pc-auth-card {
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.pc-choice {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+  }
+
+  > span {
+    display: block;
+    border: 1.5px solid $campo;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: $carta;
+  }
+
+  strong {
+    display: block;
+  }
+
+  small {
+    color: $attenuato;
+  }
+
+  input:checked + span {
+    border-color: $indaco;
+    box-shadow: inset 0 0 0 1px $indaco;
+    background: rgba($indaco, 0.06);
+  }
+
+  input:focus-visible + span {
+    outline: 3px solid rgba($indaco, 0.55);
+    outline-offset: 2px;
+  }
+}
+
+// ---- Diario: elenco dei bambini ---------------------------------------------------
+.pc-tiles {
+  display: grid;
+  gap: 1rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pc-tile {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 1.25rem;
+  text-decoration: none;
+  color: $inchiostro;
+
+  &:hover {
+    border-color: $indaco;
+    color: $inchiostro;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+
+  p {
+    margin: 0.2rem 0 0;
+    color: $attenuato;
+  }
+}
+
+.pc-avatar {
+  flex: none;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba($indaco, 0.12);
+  color: $indaco;
+  font-family: $headings-font-family;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+// ---- Scheda del bambino -----------------------------------------------------------
+.pc-summary {
+  color: $attenuato;
+  margin: 0.5rem 0 0;
+}
+
+.pc-patterns {
+  margin-top: 1.25rem;
+
+  h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.pc-tabs {
+  margin-block: 2rem 1.5rem;
+  border-bottom: 1px solid $linea;
+
+  .nav-link {
+    font-weight: 700;
+    color: $attenuato;
+
+    &.active {
+      color: $indaco;
+    }
+  }
+}
+
+.pc-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+
+  h2 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+}
+
+// La linea del tempo: il sentiero del diario. Ogni tappa e' un evento; piu' e' grande, piu' era forte.
+.pc-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 2.25rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0.7rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 3px;
+    border-radius: 3px;
+    background: $indaco;
+    opacity: 0.35;
+  }
+}
+
+.pc-stop {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.pc-stop-dot {
+  position: absolute;
+  left: calc(-2.25rem + 0.7rem + 1.5px);
+  top: 1.1rem;
+  width: var(--dot, 1rem);
+  height: var(--dot, 1rem);
+  transform: translate(-50%, 0);
+  border-radius: 50%;
+  border: 3px solid $foglio;
+  box-sizing: content-box;
+}
+
+.pc-stop-card {
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.pc-stop-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.pc-stop-when {
+  font-weight: 700;
+}
+
+.pc-stop-where {
+  color: $attenuato;
+}
+
+.pc-field-note {
+  margin: 0.6rem 0 0;
+
+  b {
+    display: block;
+    font-size: 0.9rem;
+    color: $attenuato;
+    font-weight: 700;
+  }
+}
+
+.pc-delete {
+  color: $attenuato;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.15rem 0;
+
+  &:hover {
+    color: $danger;
+  }
+}
+
+// Intensita': etichetta con numero e parola
+@each $livello, $colore in $ramp {
+  .pc-level-#{$livello} {
+    background: $colore;
+    color: map-get($ramp-testo, $livello);
+  }
+}
+
+.pc-intensity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 50rem;
+  padding: 0.15rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+// ---- Selettore dell'intensita': barre crescenti, come il volume ---------------------
+// Bootstrap ingrandisce le <legend>: qui deve avere la stessa misura delle altre etichette.
+legend.form-label {
+  float: none;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pc-volume {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.pc-volume-bar {
+  position: relative;
+}
+
+.pc-volume-input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.pc-volume-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 3rem;
+  height: var(--h);
+  padding-top: 0.3rem;
+  border-radius: 0.6rem;
+  background: #e1e3ee;
+  color: $attenuato;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+@each $livello, $colore in $ramp {
+  .pc-volume-input:checked ~ .pc-level-#{$livello},
+  .pc-volume-label.is-filled.pc-level-#{$livello} {
+    background: $colore;
+    color: map-get($ramp-testo, $livello);
+  }
+}
+
+.pc-volume-input:checked ~ .pc-volume-label {
+  box-shadow: 0 0 0 3px $carta, 0 0 0 5px $inchiostro;
+}
+
+.pc-volume-input:focus-visible ~ .pc-volume-label {
+  outline: 3px solid rgba($indaco, 0.55);
+  outline-offset: 4px;
+}
+
+.pc-volume-caption {
+  margin-top: 0.75rem;
+  min-height: 1.5rem;
+  color: $attenuato;
+}
+
+// ---- Chip (stimoli) ----------------------------------------------------------------------
+.pc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pc-chip {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0.25rem 0.9rem;
+    border: 1.5px solid $campo;
+    border-radius: 50rem;
+    background: $carta;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  input:checked + span {
+    background: $indaco;
+    border-color: $indaco;
+    color: #fff;
+  }
+
+  input:focus-visible + span {
+    outline: 3px solid rgba($indaco, 0.55);
+    outline-offset: 2px;
+  }
+}
+
+.pc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.7rem;
+  border-radius: 50rem;
+  border: 1.5px solid $campo;
+  background: $carta;
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  em {
+    font-style: normal;
+    color: $attenuato;
+    font-weight: 400;
+  }
+}
+
+.pc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+// ---- Community ----------------------------------------------------------------------------
+.pc-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pc-filter {
+  border: 1.5px solid $campo;
+  background: $carta;
+  color: $inchiostro;
+  border-radius: 50rem;
+  min-height: 2.5rem;
+  padding: 0.25rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+
+  &:hover {
+    border-color: $indaco;
+  }
+
+  &.is-on {
+    background: $indaco;
+    border-color: $indaco;
+    color: #fff;
+  }
+}
+
+.pc-posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid $linea;
+}
+
+.pc-post-row {
+  display: block;
+  padding: 1.15rem 0.25rem;
+  border-bottom: 1px solid $linea;
+  text-decoration: none;
+  color: $inchiostro;
+
+  &:hover h2 {
+    color: $indaco;
+    text-decoration: underline;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem;
+  }
+
+  p {
+    margin: 0 0 0.5rem;
+    color: $attenuato;
+    max-width: 44rem;
+  }
+}
+
+.pc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.9rem;
+  font-size: 0.92rem;
+  color: $attenuato;
+}
+
+.pc-cat {
+  border: 1.5px solid $campo;
+  border-radius: 50rem;
+  padding: 0 0.6rem;
+  font-weight: 700;
+  color: $inchiostro;
+  background: $carta;
+}
+
+.pc-post-body {
+  white-space: pre-wrap;
+  font-size: 1.1rem;
+  max-width: 42rem;
+}
+
+.pc-comments {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  max-width: 42rem;
+}
+
+.pc-comment {
+  padding: 1rem 0;
+  border-bottom: 1px solid $linea;
+
+  p {
+    margin: 0.35rem 0 0;
+    white-space: pre-wrap;
+  }
+}
+
+// ---- Stati vuoti, caricamento, errori ----------------------------------------------------------
+.pc-empty {
+  border: 1.5px dashed $campo;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  p {
+    color: $attenuato;
+    max-width: 30rem;
+    margin: 0 auto 1.25rem;
+  }
+}
+
+.pc-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: $attenuato;
+  padding-block: 2rem;
+}
+
+// ---- Guida -----------------------------------------------------------------------------------------
+.pc-article {
+  max-width: 40rem;
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2.25rem;
+  }
+
+  li {
+    margin-bottom: 0.35rem;
+  }
+}
+
+.pc-example {
+  background: $carta;
+  border: 1px solid $linea;
+  border-left: 4px solid map-get($ramp, 4);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-block: 1rem;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ---- Piede di pagina ---------------------------------------------------------------------------------
+.pc-footer {
+  border-top: 1px solid $linea;
+  padding-block: 1.5rem;
+  color: $attenuato;
+  font-size: 0.92rem;
+
+  p {
+    margin: 0;
+    max-width: 44rem;
+  }
+}
+
+// ---- Finestre con modulo: il <form> sta tra l'involucro e il corpo, quindi deve passare l'altezza
+// (senza questo, in uno schermo basso il corpo non scorre e il bottone Salva resta fuori vista).
+.modal-dialog-scrollable .modal-content > form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+// ---- Pagina "Conoscere le condizioni" ----------------------------------------------------------------
+.pc-article.pc-condizioni {
+  max-width: 46rem;
+
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 1.25rem;
+  }
+
+  ol li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.pc-avviso {
+  background: $carta;
+  border: 1px solid $linea;
+  border-left: 4px solid $indaco;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-block: 1.25rem;
+}
+
+.pc-nota {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: $foglio;
+}
+
+.pc-avviso-urgente {
+  border-left-color: map-get($ramp, 5);
+}
+
+.pc-cond-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.pc-cond-card {
+  display: block;
+  padding: 1rem 1.25rem;
+  background: $carta;
+  border: 1px solid $linea;
+  border-radius: 0.75rem;
+  color: $inchiostro;
+  text-decoration: none;
+
+  strong {
+    display: block;
+    font-size: 1.1rem;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.2rem;
+    color: $attenuato;
+  }
+
+  &:hover {
+    border-color: $indaco;
+
+    strong {
+      color: $indaco;
+      text-decoration: underline;
+    }
+  }
+}
+
+.pc-fonti {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid $linea;
+  }
+
+  a {
+    font-weight: 700;
+  }
+
+  span {
+    display: block;
+    color: $attenuato;
+    font-size: 0.92rem;
+  }
+}
+
+.pc-cond-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid $linea;
+  font-weight: 700;
+}
