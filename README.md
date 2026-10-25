@@ -4,7 +4,7 @@ Diario per le famiglie di bambini autistici, con una community per confrontarsi.
 
 Percorsi aiuta a capire **cosa succede, un momento alla volta**: il genitore annota gli *eventi sensoriali* (un rumore, una luce, la folla che mettono in difficoltà il bambino) e i *progressi*. Col tempo emergono gli stimoli che tornano più spesso. Nella community si scrivono post e commenti.
 
-> 🔗 **Versione online:** _da inserire dopo la pubblicazione_
+> 🔗 **Versione online:** https://percorsi-chi.vercel.app
 
 ## ✨ Funzioni
 
