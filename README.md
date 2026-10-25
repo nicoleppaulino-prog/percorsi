@@ -6,6 +6,10 @@ Percorsi aiuta a capire **cosa succede, un momento alla volta**: il genitore ann
 
 > 🔗 **Versione online:** https://percorsi-chi.vercel.app
 
+> 📚 **Documentazione API (Swagger):** https://percorsi-backend.onrender.com/swagger-ui.html
+
+> ⏳ Il server gratuito si addormenta se non viene usato: la prima apertura può richiedere circa un minuto.
+
 ## ✨ Funzioni
 
 - 🔐 Registrazione e login con due ruoli: **genitore** e **utente community**
